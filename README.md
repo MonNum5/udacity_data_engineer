@@ -8,16 +8,16 @@ This repo contains the material (exercises, solutions, support material and solu
 ## 1. Data Modeling
 In this section we learn about data modeling, relational data modeling with PostgreSQL and non-relational data modeling with Apache Cassandra.
 
-### Project 1: Data Modeling with Postgres
+### Project 1: Data Modelling with PostgreSQL
 For this project we build a data processing pipeline for the music start up sparkify. We extract transform and load (ETL) data or users from a 
 json format and provide them as SQL in PostgreSQL tables for the analytics team.
 
-[Link]
+[Link to Data Modelling with PostgreSQL](https://github.com/MonNum5/udacity_data_engineer/tree/master/data_modelling/project_data_modelling_w_postgres)
 
-### Project 2: Data Modeling with Cassandra
+### Project 2: Data Modelling with Apache Cassandra
 Similar to project 1 we build a ETL pipline for the music start up sparkify to provide data for analytics team and answer questions like details of a song during a particular session, information about songs played by a particular user and all users that listen to a particular song. This time the modeling is done with Apache Cassandra.
 
-[Link]
+[Link to Data Modelling with Apache Cassandra](https://github.com/MonNum5/udacity_data_engineer/tree/master/data_modelling/02_relational_data_models)
 
 ## 2. Cloud Data Warehouses
 In this section we learn about the concept of data warehouses and how to implement those concepts on Amazon Web Services (AWS).
@@ -25,7 +25,7 @@ In this section we learn about the concept of data warehouses and how to impleme
 ### Project 3: Data Warehouses with Amazon Web Services
 We apply the data modeling concepts from project 1 to the cloud and implement a ETL pipeline that extracts the sparkify data from an AWS S3 bucket, stages them in Redshift, transforms the data into dimensional tables for the analytics team.
 
-[Link]
+[Link to Data Warehouses with Amazon Web Services](https://github.com/MonNum5/udacity_data_engineer/tree/master/data_warehousing)
 
 ## 3. Data Lakes with Spark
 This section is about data processing with Spark, the concept of data lakes and the implementation of those concepts on AWS
@@ -33,10 +33,12 @@ This section is about data processing with Spark, the concept of data lakes and 
 ### Project 4: Data Lake with Spark
 In this project we build a data lake and a ETL pipline in Spark (Pyspark) that loads data from an AWS S3 bucket, processes the data into analytics tables and loads the tables back into S3.
 
-[Link]
+[Link to Data Lake with Spark](https://github.com/MonNum5/udacity_data_engineer/tree/master/data_lakes_w_spark)
 
 ## 4. Data Pipelines with Airflow
-
-### Project 5: 
+We implement a Airflow pipeline that handles, schedules and logs our ETL processes to extract data from an AWS S3 bucket, stages the data on AWS Redshift and loads the data to the final data model in AWS redshift.
+[Link to Data Pipelines with Airflow](https://github.com/MonNum5/udacity_data_engineer/tree/master/data_pipelines_w_airflow)
 
 ## 5. Capstone Project
+We apply all the content learn in this course to extract transform and load data from various datasets with Spark about US immigration and load the data to a PostgreSQL data model.
+[Link to Capstone Project](https://github.com/MonNum5/udacity_data_engineer/tree/master/capstone_project)

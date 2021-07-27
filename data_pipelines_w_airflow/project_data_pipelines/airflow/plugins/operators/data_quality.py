@@ -9,23 +9,29 @@ class DataQualityOperator(BaseOperator):
     @apply_defaults
     def __init__(self,
                  redshift_conn_id = "",
-                 tables = [],
                  *args, **kwargs):
 
         super(DataQualityOperator, self).__init__(*args, **kwargs)
         self.redshift_conn_id = redshift_conn_id
-        self.tables = []
+        xxx = 0
+        self.dq_checks=[
+                    {'check_sql':'SELECT COUNT(*) FROM users' , 'expected_result': 104},
+                    {'check_sql': 'SELECT COUNT(*) FROM time', 'expected_result':6820 },
+                    {'check_sql':'SELECT COUNT(*) FROM artists' , 'expected_result': 10025},
+                    {'check_sql': 'SELECT COUNT(*) FROM songs', 'expected_result':14896 },
+                    ]
 
     def execute(self, context):
         redshift = PostgresHook(postgres_conn_id = self.redshift_conn_id)
         self.log.info('Starting quality check')
         
-        for table in self.tables:
-            
-            records = redshit.get_records(f"SELECT COUNT(*) FROM {table}")
-            
-            if len(records) < 1 or len(records[0]) < 1 or records[0][0] < 1:
-                self.log.error(f"Quality check failed for table: {table}")
-                raise ValueError(f"Quality check failed for table: {table}")
+        for check in self.dq_checks:
+
+            query = check['check_sql']
+            records = redshift.get_records(query)
+            self.log.info(records)
+            if records[0][0] != check['expected_result']:
+                self.log.error(f"Quality check failed for query: {query}")
+                raise ValueError(f"Quality check failed for query: {query}")
             else:
-                self.log.info(f"Quality check passed for table: {table}")
+                self.log.info(f"Quality check passed for query: {query}")

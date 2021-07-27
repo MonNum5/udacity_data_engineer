@@ -10,16 +10,13 @@ from helpers import SqlQueries
 # Get IAM role from airflow variables
 iamrole = Variable.get('redshift_iamrole')
 
-"""
 default_args = {
     'owner': 'udacity',
-    'start_date': datetime(2019, 1, 12),
-}
-"""
-
-default_args = {
-    'owner': 'udacity',
-    'start_date': datetime(2021, 7, 11),
+    'start_date': datetime(2021, 7, 12),
+    'depends_on_past': False,
+    'retries': 1,
+    'retry_delay': timedelta(minutes=1),
+    'catchup': False
 }
 
 dag = DAG('udac_example_dag',
@@ -40,6 +37,7 @@ stage_events_to_redshift = StageToRedshiftOperator(
     bucket='s3://udacity-dend/log_data',
     iamrole=iamrole,
     jsonpath='s3://udacity-dend/log_json_path.json',
+    delete_table=True
 )
 
 stage_songs_to_redshift = StageToRedshiftOperator(
@@ -50,6 +48,7 @@ stage_songs_to_redshift = StageToRedshiftOperator(
     bucket='s3://udacity-dend/song_data',
     iamrole=iamrole,
     jsonpath='auto',
+    delete_table=True
 )
 
 load_songplays_table = LoadFactOperator(
@@ -99,7 +98,6 @@ run_quality_checks = DataQualityOperator(
     task_id='Run_data_quality_checks',
     redshift_conn_id="redshift",
     dag=dag,
-    tables=['users', 'time', 'artists', 'songs']
 )
 
 end_operator = DummyOperator(task_id='Stop_execution',  dag=dag)

@@ -60,6 +60,7 @@ time - timestamps of records in songplays broken down into specific units start_
 
 ## Run
 0. Setup Redshift Cluster, add IAM role, edit security and network settings and make cluster available, install airflow 
+1. Run sql querys in create_tables.sql to create tables on cluster
 1. Start aiflow
 2. Add connection credentials for redshift cluster in airflow Admin
 3. Add IAM role variable in airflow admin
